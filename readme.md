@@ -1,1 +1,1 @@
-ELITE DB 
+ELITE DB is my own database that stores  information safely 
