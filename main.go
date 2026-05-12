@@ -18,11 +18,25 @@ type Address struct {
 City string 
 Province string 
 Country string 
-Pincode Json.Number
+Pincode json.Number
 }
 
 func main (){
 
-fmt.Println("Welcome to Elite DB")
+	dir := "./"
 
-}
+	db, err := New(dir,nil)
+	if err != nil {
+		fmt.Println("Error Error",err)
+	}
+
+	employees := user[]{
+		{"Srijal","25","9847021452","Microsoft",Address{"Bagmati Province","Kathmandu","Nepal", " 44600"}}
+		{"Sujan","29","9857034129","Google",Address{"Bagmati Province","Lalitpur","Nepal","44700"}}
+		{"Rohan","32","9847034128","Meta",Address{"Lumbini Province","Lamahi","Nepal","22414"}}
+		{"Rajesh","33","98050326471","E-sewa",Address{"Gandaki Province","Pokhara","Nepal","33700"}}
+		{"Amrit","39","9847032128","CG",Address{"Madhest Province","Janakpur","Nepal","45600"}}
+	}
+
+
+} 
