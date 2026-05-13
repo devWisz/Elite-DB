@@ -30,7 +30,7 @@ func main (){
 		fmt.Println("Error Error",err)
 	}
 
-	employees := user[]{
+	employees := []User{
 		{"Srijal","25","9847021452","Microsoft",Address{"Bagmati Province","Kathmandu","Nepal", " 44600"}}
 		{"Sujan","29","9857034129","Google",Address{"Bagmati Province","Lalitpur","Nepal","44700"}}
 		{"Rohan","32","9847034128","Meta",Address{"Lumbini Province","Lamahi","Nepal","22414"}}
@@ -38,5 +38,16 @@ func main (){
 		{"Amrit","39","9847032128","CG",Address{"Madhest Province","Janakpur","Nepal","45600"}}
 	}
 
+	for _, value := range employees{
+		db.Write("users", value.Name, User){
+			Name: value.Name,
+			Age: value.Age,
+			Contact : value.Contact,
+			Company: value.Company,
+			Address: value.Address,
 
-} 
+		}
+	}
+
+
+}
