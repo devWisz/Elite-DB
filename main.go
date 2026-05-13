@@ -49,5 +49,22 @@ func main (){
 		}
 	}
 
+	records, err := db.ReadAll("users")
+	if err != nil {
+		fmt.Println("Error!!",err)
+	}
 
+	fmt.Println(records)
+
+
+	allusers := []User{}
+	for _, f:= range records {
+employeeFound := User{}
+if err := json.Unmarshal([]byte(f), &employeeFound);  err  != nil {
+	fmt.Println("Error !!", err)
 }
+
+allusers = append(allusers , employeeFound)
+	} 
+
+} 
