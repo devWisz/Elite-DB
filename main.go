@@ -3,7 +3,12 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"os"
+	"sync"
+	"github.com/jcelliott/lumber"
 )
+
+const Version = "1.0.0"
 
 type user struct {
 	Name string 
@@ -85,4 +90,4 @@ allusers = append(allusers , employeeFound)
 // if err := db.Delete("user,""); err != nil {
 // fmt.Println("Error",err)
 // }
-// }   
+// }
