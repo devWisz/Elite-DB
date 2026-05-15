@@ -10,6 +10,17 @@ import (
 
 const Version = "1.0.0"
 
+type {
+		Logger interface {
+			Fatal(string,...interface{})
+			Error( string , ...interface{})
+			 Warn(string, ...interface{}) 
+			Info(string, ...interface{})
+			Debug(string, ...interface{})
+			Trace(string, ...interface{})
+		}
+}
+
 type user struct {
 	Name string 
 	Age json.Number
