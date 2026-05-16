@@ -19,7 +19,45 @@ type {
 			Debug(string, ...interface{})
 			Trace(string, ...interface{})
 		}
+
+
+		Driver struct {
+			mutex sync.Mutex
+			mutexes map[string]*sync.Mutex 
+			dir string 
+			log logger
+		}
 }
+
+type Options struct{
+	Logger 
+}
+
+func New()(){
+
+}
+
+func Write()error{
+
+}
+
+
+func Read()error {
+
+
+}
+
+
+func ReadAll()(){
+
+
+}
+
+func Delete() error {
+
+
+}
+
 
 type user struct {
 	Name string 
