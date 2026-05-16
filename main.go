@@ -33,27 +33,30 @@ type Options struct{
 	Logger 
 }
 
-func New()(){
+func New(dir string, options *Options)(*Driver,error){
 
 }
 
-func Write()error{
+func (d *Driver) Write()error{
 
 }
 
-
-func Read()error {
-
-
-}
-
-
-func ReadAll()(){
+func (d *Driver) Read()error {
 
 
 }
 
-func Delete() error {
+func (d *Driver) ReadAll()(){
+
+
+}
+
+func (d *Driver) Delete() error {
+
+
+}
+
+func (d *Driver) getOrCreateMutex() *sync.Mutex{
 
 
 }
