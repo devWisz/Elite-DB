@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"sync"
+	"path/filepath"
+	"github.com/blend/go-sdk/stringutil"
 	"github.com/jcelliott/lumber"
 )
 
@@ -34,6 +36,20 @@ type Options struct{
 }
 
 func New(dir string, options *Options)(*Driver,error){
+
+	dir = filepath.Clean(dir)
+
+
+	opts :=Options[]
+
+	if options != nil {
+
+	opts = *options
+	}
+
+	if opts.Logger ==nil {
+		opts.logger = lumber.NewConsoleLogger((lumber.INFO))
+	}
 
 }
 
