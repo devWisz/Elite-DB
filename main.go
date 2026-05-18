@@ -51,6 +51,18 @@ func New(dir string, options *Options)(*Driver,error){
 		opts.logger = lumber.NewConsoleLogger((lumber.INFO))
 	}
 
+	driver := Driver {
+		dir:dir,
+		mutexas:make(map[string]*sync.Mutex),
+		log: opts.Logger,
+	}
+if _, err := os.Stat(dir); err==nil {
+	opts.Logger.Debug("Using '%s'(database already exists)\n",dir)
+	return &driver,nil
+}
+
+opts.Logger.Debug("Creating the database at '%s"...\n",dir)
+return &driver, os.MkdirAll(dir,0755)
 }
 
 func (d *Driver) Write()error{
