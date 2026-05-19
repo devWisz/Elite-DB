@@ -89,6 +89,13 @@ func (d *Driver) getOrCreateMutex() *sync.Mutex{
 
 }
 
+func stat(path string)(fi os.FileInfo,err error){
+if fi,err = os.Stat(path);os.IsNotExist(err){
+fi,err = os.Stat(path + ".json")
+}
+return
+}
+
 
 type user struct {
 	Name string 
