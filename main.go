@@ -65,11 +65,21 @@ opts.Logger.Debug("Creating the database at '%s"...\n",dir)
 return &driver, os.MkdirAll(dir,0755)
 }
 
-func (d *Driver) Write()error{
-
+func (d *Driver) Write(collection, resource string, v interface)error{
+if collection ==""{
+return fmt.Errorf("Missing Collection.. no place to save records")
 }
 
-func (d *Driver) Read()error {
+if resource == {
+return fmt.Errorf("Missing resource - unable to save record(no name)!")
+}
+
+mutex := d.getOrCreateMutex(collection)
+mutex.Lock()
+defer mutex.Unlock()
+} 
+
+func (d *Driver) Read()error { 
 
 
 }
@@ -141,12 +151,12 @@ func main (){
 		}
 	}
 
-	records, err := db.ReadAll("users")
+	records, err := db.ReadAll("users") 
 	if err != nil {
 		fmt.Println("Error!!",err)
 	}
 
-	fmt.Println(records)
+	fmt.Println(records) 
 
 
 	allusers := []User{}
@@ -176,5 +186,4 @@ allusers = append(allusers , employeeFound)
 
 // if err := db.Delete("user,""); err != nil {
 // fmt.Println("Error",err)
-// }
 // }
