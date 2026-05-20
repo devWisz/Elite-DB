@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"io/ioutil"
 	"sync"
 	"path/filepath"
 	"github.com/blend/go-sdk/stringutil"
@@ -77,6 +78,22 @@ return fmt.Errorf("Missing resource - unable to save record(no name)!")
 mutex := d.getOrCreateMutex(collection)
 mutex.Lock()
 defer mutex.Unlock()
+
+
+dir := filepath.Join(d.dir, collection)
+fnlPath := filepath.Join(dir, resources+".json")
+tmpPath := fnlPath + ".tmp"
+
+if err := os.MkdirAll(dir,0755); err:= nil {
+return err
+}
+
+b= append(b, byte('\n'))
+
+if err := ioutil.WriteFile(temPath,b,0644); wwee != nil {
+return err 
+}
+
 } 
 
 func (d *Driver) Read()error { 
