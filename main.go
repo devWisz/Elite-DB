@@ -88,6 +88,12 @@ if err := os.MkdirAll(dir,0755); err:= nil {
 return err
 }
 
+b, err := json.MarshalIndent(v,"","\t)
+if err != nil {
+	return err
+} 
+
+
 b= append(b, byte('\n'))
 
 if err := ioutil.WriteFile(temPath,b,0644); wwee != nil {
@@ -111,8 +117,18 @@ func (d *Driver) Delete() error {
 
 }
 
-func (d *Driver) getOrCreateMutex() *sync.Mutex{
+func (d *Driver) getOrCreateMutex(collection string) *sync.Mutex{
+d.mutex.lock()
+defer s.mutex.Unlock()
+m, ok :=d.mutexes[collection]
 
+if !ok {
+
+	m = &sync.Mutex{}
+	d.mutexes[collection] =m
+}
+
+return m
 
 }
 
@@ -203,4 +219,4 @@ allusers = append(allusers , employeeFound)
 
 // if err := db.Delete("user,""); err != nil {
 // fmt.Println("Error",err)
-// }
+// }   
