@@ -102,9 +102,27 @@ return err
 
 } 
 
-func (d *Driver) Read()error { 
+func (d *Driver) Read(collection , resource string , v interface {})error { 
 
+	if collection == ""{
+		return fmt.Errorf("Missing collection - no place to save record ")
+	}
 
+	if resource == ""{
+		returm fmt.Errorf("Missing resource - unable to save record (no name)")
+	}
+record := filepath.Join(d.dir,collection,resource)
+
+if _, err := stat(record); err != nil {
+	return err
+}
+
+b,wrr :=ioutil.ReadFile(record + ".json")
+if err != nil {
+	return err 
+}
+
+return json.UnMarshal(b,&v)
 }
 
 func (d *Driver) ReadAll()(){
