@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"sync"
 	"path/filepath"
-	"github.com/blend/go-sdk/stringutil"
 	"github.com/jcelliott/lumber"
 )
 
@@ -47,12 +46,12 @@ func New(dir string, options *Options)(*Driver,error){
 	}
 
 	if opts.Logger ==nil {
-		opts.logger = lumber.NewConsoleLogger((lumber.INFO))
+		opts.Logger = lumber.NewConsoleLogger((lumber.INFO))
 	}
 
 	driver := Driver {
 		dir:dir,
-		mutexas:make(map[string]*sync.Mutex),
+		mutexes:make(map[string]*sync.Mutex),
 		log: opts.Logger,
 	}
 if _, err := os.Stat(dir); err==nil {
@@ -79,7 +78,7 @@ defer mutex.Unlock()
 
 
 dir := filepath.Join(d.dir, collection)
-fnlPath := filepath.Join(dir, resources+".json")
+fnlPath := filepath.Join(dir, resource+".json")
 tmpPath := fnlPath + ".tmp"
 
 if err := os.MkdirAll(dir,0755); err!= nil {
@@ -94,7 +93,7 @@ if err != nil {
 
 b= append(b, byte('\n'))
 
-if err := ioutil.WriteFile(temPath,b,0644); err != nil {
+if err := ioutil.WriteFile(tmpPath,b,0644); err != nil {
 return err 
 }
 
@@ -116,7 +115,7 @@ if _, err := stat(record); err != nil {
 	return err
 }
 
-b,wrr :=ioutil.ReadFile(record + ".json")
+b,err :=ioutil.ReadFile(record + ".json")
 if err != nil {
 	return err 
 }
@@ -162,7 +161,7 @@ func (d *Driver) Delete(collection, resource string) error {
 mutex := d.getOrCreateMutex(collection)
 
 mutex.Lock()
-defer mutex.unlock()
+defer mutex.Unlock()
 
 dir := filepath.Join(d.dir, path)
 
@@ -186,8 +185,8 @@ return nil
 }
 
 func (d *Driver) getOrCreateMutex(collection string) *sync.Mutex{
-d.mutex.lock()
-defer s.mutex.Unlock()
+d.mutex.Lock()
+defer d.mutex.Unlock()
 m, ok :=d.mutexes[collection]
 
 if !ok {
@@ -208,7 +207,7 @@ return
 }
 
 
-type user struct {
+type User struct {
 	Name string 
 	Age json.Number
 	Contact string 
@@ -269,7 +268,7 @@ if err := json.Unmarshal([]byte(f), &employeeFound);  err  != nil {
 }
 
 allusers = append(allusers , employeeFound)
-	} 
+	} }
 
 	// so these is the comments added by a human so read this out properly
 // for now these code is commented as it works to delete the users so if you want to delete a particular user or all the user uncomment this code 
@@ -288,4 +287,4 @@ allusers = append(allusers , employeeFound)
 
 // if err := db.Delete("users",""); err != nil {
 // fmt.Println("Error",err)
-// }}
+// }}}
