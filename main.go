@@ -13,10 +13,10 @@ import (
 
 const Version = "1.0.0"
 
-type {
+type{
 		Logger interface {
 			Fatal(string,...interface{})
-			Error( string , ...interface{})
+			Error( string, ...interface{})
 			 Warn(string, ...interface{}) 
 			Info(string, ...interface{})
 			Debug(string, ...interface{})
@@ -158,9 +158,33 @@ for_, file :=range files {
 	return records , nil
 }
 
-func (d *Driver) Delete() error {
+func (d *Driver) Delete(collection, resource string) error {
+
+	path := filepath.Join(collection, resource)
+mutex := d.getOrCreateMutex(collection)
+
+mutex.Lock()
+defer mutex.unlock()
+
+dir := filepath.Join(d.dir, path)
+
+switch fi, err := stat(dir); {
+
+case fi==nil , err != nil:
+
+	return fmt.Errorf("Unable to delete record - %s does not exist", path)
+
+	case fi.Mode().IsDir();
+
+	return os.RemoveAll(dir)
 
 
+case fi.Mode().IsRegular():
+	return os.RemoveAll(dir + ".json")
+
+}
+
+return nil
 }
 
 func (d *Driver) getOrCreateMutex(collection string) *sync.Mutex{
