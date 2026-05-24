@@ -1,0 +1,12 @@
+{
+	"Name": "Rohan",
+	"Age": 32,
+	"Contact": "9847034128",
+	"Company": "Meta",
+	"Address": {
+		"City": "Lamahi",
+		"Province": "Lumbini Province",
+		"Country": "Nepal",
+		"Pincode": 22414
+	}
+}

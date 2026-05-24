@@ -286,5 +286,4 @@ allusers = append(allusers , employeeFound)
 // Delete all the user from database
 
 // if err := db.Delete("users",""); err != nil {
-// fmt.Println("Error",err)
-// }}}
+// fmt.Println("Error",err) 

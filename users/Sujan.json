@@ -1,0 +1,12 @@
+{
+	"Name": "Sujan",
+	"Age": 29,
+	"Contact": "9857034129",
+	"Company": "Google",
+	"Address": {
+		"City": "Lalitpur",
+		"Province": "Bagmati Province",
+		"Country": "Nepal",
+		"Pincode": 44700
+	}
+}

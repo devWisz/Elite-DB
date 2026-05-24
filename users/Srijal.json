@@ -1,0 +1,12 @@
+{
+	"Name": "Srijal",
+	"Age": 25,
+	"Contact": "9847021452",
+	"Company": "Microsoft",
+	"Address": {
+		"City": "Kathmandu",
+		"Province": "Bagmati Province",
+		"Country": "Nepal",
+		"Pincode": 44600
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"Name": "Rajesh",
+	"Age": 33,
+	"Contact": "98050326471",
+	"Company": "E-sewa",
+	"Address": {
+		"City": "Pokhara",
+		"Province": "Gandaki Province",
+		"Country": "Nepal",
+		"Pincode": 33700
+	}
+}

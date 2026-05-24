@@ -1,0 +1,12 @@
+{
+	"Name": "Amrit",
+	"Age": 39,
+	"Contact": "9847032128",
+	"Company": "CG",
+	"Address": {
+		"City": "Janakpur",
+		"Province": "Madhest Province",
+		"Country": "Nepal",
+		"Pincode": 45600
+	}
+}
