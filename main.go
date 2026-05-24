@@ -13,24 +13,22 @@ import (
 
 const Version = "1.0.0"
 
-type{
-		Logger interface {
-			Fatal(string,...interface{})
-			Error( string, ...interface{})
-			 Warn(string, ...interface{}) 
-			Info(string, ...interface{})
-			Debug(string, ...interface{})
-			Trace(string, ...interface{})
+type Logger interface {
+		Fatal(string,...interface{})
+		Error( string, ...interface{})
+		Warn(string, ...interface{}) 
+		Info(string, ...interface{})
+	  	Debug(string, ...interface{})
+		Trace(string, ...interface{})
 		}
 
 
-		Driver struct {
+		type Driver struct {
 			mutex sync.Mutex
 			mutexes map[string]*sync.Mutex 
 			dir string 
-			log logger
+			log Logger
 		}
-}
 
 type Options struct{
 	Logger 
@@ -41,7 +39,7 @@ func New(dir string, options *Options)(*Driver,error){
 	dir = filepath.Clean(dir)
 
 
-	opts :=Options[]
+	opts :=Options{}
 
 	if options != nil {
 
@@ -62,16 +60,16 @@ if _, err := os.Stat(dir); err==nil {
 	return &driver,nil
 }
 
-opts.Logger.Debug("Creating the database at '%s"...\n",dir)
+opts.Logger.Debug("Creating the database at '%s'...\n",dir)
 return &driver, os.MkdirAll(dir,0755)
 }
 
-func (d *Driver) Write(collection, resource string, v interface)error{
+func (d *Driver) Write(collection, resource string, v interface{})error{
 if collection ==""{
 return fmt.Errorf("Missing Collection.. no place to save records")
 }
 
-if resource == {
+if resource == "" {
 return fmt.Errorf("Missing resource - unable to save record(no name)!")
 }
 
@@ -84,11 +82,11 @@ dir := filepath.Join(d.dir, collection)
 fnlPath := filepath.Join(dir, resources+".json")
 tmpPath := fnlPath + ".tmp"
 
-if err := os.MkdirAll(dir,0755); err:= nil {
+if err := os.MkdirAll(dir,0755); err!= nil {
 return err
 }
 
-b, err := json.MarshalIndent(v,"","\t)
+b, err := json.MarshalIndent(v,"","\t")
 if err != nil {
 	return err
 } 
@@ -96,7 +94,7 @@ if err != nil {
 
 b= append(b, byte('\n'))
 
-if err := ioutil.WriteFile(temPath,b,0644); wwee != nil {
+if err := ioutil.WriteFile(temPath,b,0644); err != nil {
 return err 
 }
 
@@ -110,7 +108,7 @@ func (d *Driver) Read(collection , resource string , v interface {})error {
 	}
 
 	if resource == ""{
-		returm fmt.Errorf("Missing resource - unable to read (no name)")
+		return fmt.Errorf("Missing resource - unable to read (no name)")
 	}
 record := filepath.Join(d.dir,collection,resource)
 
@@ -123,7 +121,7 @@ if err != nil {
 	return err 
 }
 
-return json.UnMarshal(b,&v)
+return json.Unmarshal(b,&v)
 }
 
 func (d *Driver) ReadAll(collection string)([]string,error){
@@ -143,11 +141,11 @@ func (d *Driver) ReadAll(collection string)([]string,error){
 
 	var records[] string 
 
-for_, file :=range files {
+for _, file :=range files {
 
-		b,err :=.ReadFile (filepath.Join(dir, file.Name()))
+		b,err := ioutil.ReadFile (filepath.Join(dir, file.Name()))
 
-		if err! = nil {
+		if err != nil {
 
 			return nil,err
 		}
@@ -174,7 +172,7 @@ case fi==nil , err != nil:
 
 	return fmt.Errorf("Unable to delete record - %s does not exist", path)
 
-	case fi.Mode().IsDir();
+case fi.Mode().IsDir():
 
 	return os.RemoveAll(dir)
 
@@ -235,23 +233,24 @@ func main (){
 		fmt.Println("Error Error",err)
 	}
 
-	employees := []User{
-		{"Srijal","25","9847021452","Microsoft",Address{"Bagmati Province","Kathmandu","Nepal", " 44600"}}
-		{"Sujan","29","9857034129","Google",Address{"Bagmati Province","Lalitpur","Nepal","44700"}}
-		{"Rohan","32","9847034128","Meta",Address{"Lumbini Province","Lamahi","Nepal","22414"}}
-		{"Rajesh","33","98050326471","E-sewa",Address{"Gandaki Province","Pokhara","Nepal","33700"}}
-		{"Amrit","39","9847032128","CG",Address{"Madhest Province","Janakpur","Nepal","45600"}}
+employees := []User{
+		{"Srijal", "25", "9847021452", "Microsoft", Address{"Kathmandu", "Bagmati Province", "Nepal", "44600"}},
+		{"Sujan", "29", "9857034129", "Google", Address{"Lalitpur", "Bagmati Province", "Nepal", "44700"}},
+		{"Rohan", "32", "9847034128", "Meta", Address{"Lamahi", "Lumbini Province", "Nepal", "22414"}},
+		{"Rajesh", "33", "98050326471", "E-sewa", Address{"Pokhara", "Gandaki Province", "Nepal", "33700"}},
+		{"Amrit", "39", "9847032128", "CG", Address{"Janakpur", "Madhest Province", "Nepal", "45600"}},
 	}
 
+	
 	for _, value := range employees{
-		db.Write("users", value.Name, User){
+		db.Write("users", value.Name, User{
 			Name: value.Name,
 			Age: value.Age,
 			Contact : value.Contact,
 			Company: value.Company,
 			Address: value.Address,
 
-		}
+		})
 	}
 
 	records, err := db.ReadAll("users") 
@@ -287,6 +286,6 @@ allusers = append(allusers , employeeFound)
 
 // Delete all the user from database
 
-// if err := db.Delete("user,""); err != nil {
+// if err := db.Delete("users",""); err != nil {
 // fmt.Println("Error",err)
-// }
+// }}
