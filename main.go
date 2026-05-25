@@ -268,7 +268,7 @@ if err := json.Unmarshal([]byte(f), &employeeFound);  err  != nil {
 }
 
 allusers = append(allusers , employeeFound)
-	} }
+	}
 
 	// so these is the comments added by a human so read this out properly
 // for now these code is commented as it works to delete the users so if you want to delete a particular user or all the user uncomment this code 
@@ -278,12 +278,14 @@ allusers = append(allusers , employeeFound)
 // Delete a particular user from the database
 
 // 	fmt.Println((allusers))
-// if err := db.Delete("user","Srijal") err != nil {
+// if err := db.Delete("user","Srijal"); err != nil {
 // 	fmt.Println("Error",err)
 // }
 
 
 // Delete all the user from database
 
-// if err := db.Delete("users",""); err != nil {
-// fmt.Println("Error",err) 
+	// 	if err := db.Delete("users", ""); err != nil {
+	// 	fmt.Println("Error",err)
+	// }
+}
