@@ -232,6 +232,9 @@ func main (){
 		fmt.Println("Error Error",err)
 	}
 
+
+//  if you want to add other data than this you can add any but don't forget to follow the pattern of the code
+
 employees := []User{
 		{"Srijal", "25", "9847021452", "Microsoft", Address{"Kathmandu", "Bagmati Province", "Nepal", "44600"}},
 		{"Sujan", "29", "9857034129", "Google", Address{"Lalitpur", "Bagmati Province", "Nepal", "44700"}},

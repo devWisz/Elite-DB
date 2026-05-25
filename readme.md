@@ -3,7 +3,8 @@
 EliteDB is a lightweight file-based JSON database built with Go where you can store you information like any other database software.
 
 
-Test the DB directly from here : 
+
+Test the DB directly from here : https://github.com/devWisz/Elite-DB/releases/tag/1.0
 
 ## Features
 
@@ -113,4 +114,4 @@ db.Delete("users", "")
 
 EliteDB is fully open source.Contributions, improvements, and forks are always welcome.
 
-Developed by devWisZ aka Sarjak Khanal
+Developed by devWisZ aka Sarjak Khanal.
