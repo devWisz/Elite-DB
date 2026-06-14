@@ -281,7 +281,7 @@ allusers = append(allusers , employeeFound)
 // Delete a particular user from the database
 
 // 	fmt.Println((allusers))
-// if err := db.Delete("user","Srijal"); err != nil {
+// if err := db.Delete("users","Srijal"); err != nil {
 // 	fmt.Println("Error",err)
 // }
 
