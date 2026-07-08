@@ -11,6 +11,10 @@ ScreenShots of the project :
 ![alt text](db.png)
 ![alt text](users.png)
 
+
+Tech stack used : 
+Golang
+
 ## Features
 
 - Lightweight and fast
@@ -114,6 +118,9 @@ db.Delete("users", "Srijal")
 ```go
 db.Delete("users", "")
 ```
+
+Inspiration behind the project : 
+I always wanna build something like my own database so i was quite motivated to make this project.
 
 # Open Source
 
